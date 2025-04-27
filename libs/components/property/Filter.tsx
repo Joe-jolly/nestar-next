@@ -45,37 +45,80 @@ const Filter = (props: FilterType) => {
 
 	/** LIFECYCLES **/
 	useEffect(() => {
-		const queryParams = JSON.stringify({
-			...searchFilter,
-			search: {
-				...searchFilter.search,
-			},
-		});
-
 		if (searchFilter?.search?.locationList?.length == 0) {
 			delete searchFilter.search.locationList;
 			setShowMore(false);
-			router.push(`/property?input=${queryParams}`, `/property?input=${queryParams}`, { scroll: false }).then();
+			router.push(`/property?input=${JSON.stringify({
+				...searchFilter,
+				search: {
+					...searchFilter.search,
+				},
+			})}`, `/property?input=${JSON.stringify({
+				...searchFilter,
+				search: {
+					...searchFilter.search,
+				},
+			})}`, { scroll: false }).then();
 		}
 
 		if (searchFilter?.search?.typeList?.length == 0) {
 			delete searchFilter.search.typeList;
-			router.push(`/property?input=${queryParams}`, `/property?input=${queryParams}`, { scroll: false }).then();
+			router.push(`/property?input=${JSON.stringify({
+				...searchFilter,
+				search: {
+					...searchFilter.search,
+				},
+			})}`, `/property?input=${JSON.stringify({
+				...searchFilter,
+				search: {
+					...searchFilter.search,
+				},
+			})}`, { scroll: false }).then();
 		}
 
-		if (searchFilter?.search?.roomsList?.length == 0) {
-			delete searchFilter.search.roomsList;
-			router.push(`/property?input=${queryParams}`, `/property?input=${queryParams}`, { scroll: false }).then();
+		if (searchFilter?.search?.roomList?.length == 0) {
+			delete searchFilter.search.roomList;
+			router.push(`/property?input=${JSON.stringify({
+				...searchFilter,
+				search: {
+					...searchFilter.search,
+				},
+			})}`, `/property?input=${JSON.stringify({
+				...searchFilter,
+				search: {
+					...searchFilter.search,
+				},
+			})}`, { scroll: false }).then();
 		}
 
 		if (searchFilter?.search?.options?.length == 0) {
 			delete searchFilter.search.options;
-			router.push(`/property?input=${queryParams}`, `/property?input=${queryParams}`, { scroll: false }).then();
+			router.push(`/property?input=${JSON.stringify({
+				...searchFilter,
+				search: {
+					...searchFilter.search,
+				},
+			})}`, `/property?input=${JSON.stringify({
+				...searchFilter,
+				search: {
+					...searchFilter.search,
+				},
+			})}`, { scroll: false }).then();
 		}
 
 		if (searchFilter?.search?.bedsList?.length == 0) {
 			delete searchFilter.search.bedsList;
-			router.push(`/property?input=${queryParams}`, `/property?input=${queryParams}`, { scroll: false }).then();
+			router.push(`/property?input=${JSON.stringify({
+				...searchFilter,
+				search: {
+					...searchFilter.search,
+				},
+			})}`, `/property?input=${JSON.stringify({
+				...searchFilter,
+				search: {
+					...searchFilter.search,
+				},
+			})}`, { scroll: false }).then();
 		}
 
 		if (searchFilter?.search?.locationList) setShowMore(true);
@@ -184,20 +227,20 @@ const Filter = (props: FilterType) => {
 		async (number: Number) => {
 			try {
 				if (number != 0) {
-					if (searchFilter?.search?.roomsList?.includes(number)) {
+					if (searchFilter?.search?.roomList?.includes(number)) {
 						await router.push(
 							`/property?input=${JSON.stringify({
 								...searchFilter,
 								search: {
 									...searchFilter.search,
-									roomsList: searchFilter?.search?.roomsList?.filter((item: Number) => item !== number),
+									roomList: searchFilter?.search?.roomList?.filter((item: Number) => item !== number),
 								},
 							})}`,
 							`/property?input=${JSON.stringify({
 								...searchFilter,
 								search: {
 									...searchFilter.search,
-									roomsList: searchFilter?.search?.roomsList?.filter((item: Number) => item !== number),
+									roomList: searchFilter?.search?.roomList?.filter((item: Number) => item !== number),
 								},
 							})}`,
 							{ scroll: false },
@@ -206,17 +249,17 @@ const Filter = (props: FilterType) => {
 						await router.push(
 							`/property?input=${JSON.stringify({
 								...searchFilter,
-								search: { ...searchFilter.search, roomsList: [...(searchFilter?.search?.roomsList || []), number] },
+								search: { ...searchFilter.search, roomList: [...(searchFilter?.search?.roomList || []), number] },
 							})}`,
 							`/property?input=${JSON.stringify({
 								...searchFilter,
-								search: { ...searchFilter.search, roomsList: [...(searchFilter?.search?.roomsList || []), number] },
+								search: { ...searchFilter.search, roomList: [...(searchFilter?.search?.roomList || []), number] },
 							})}`,
 							{ scroll: false },
 						);
 					}
 				} else {
-					delete searchFilter?.search.roomsList;
+					delete searchFilter?.search.roomList;
 					setSearchFilter({ ...searchFilter });
 					await router.push(
 						`/property?input=${JSON.stringify({
@@ -555,7 +598,7 @@ const Filter = (props: FilterType) => {
 						<Button
 							sx={{
 								borderRadius: '12px 0 0 12px',
-								border: !searchFilter?.search?.roomsList ? '2px solid #181A20' : '1px solid #b9b9b9',
+								border: !searchFilter?.search?.roomList ? '2px solid #181A20' : '1px solid #b9b9b9',
 							}}
 							onClick={() => propertyRoomSelectHandler(0)}
 						>
@@ -564,8 +607,8 @@ const Filter = (props: FilterType) => {
 						<Button
 							sx={{
 								borderRadius: 0,
-								border: searchFilter?.search?.roomsList?.includes(1) ? '2px solid #181A20' : '1px solid #b9b9b9',
-								borderLeft: searchFilter?.search?.roomsList?.includes(1) ? undefined : 'none',
+								border: searchFilter?.search?.roomList?.includes(1) ? '2px solid #181A20' : '1px solid #b9b9b9',
+								borderLeft: searchFilter?.search?.roomList?.includes(1) ? undefined : 'none',
 							}}
 							onClick={() => propertyRoomSelectHandler(1)}
 						>
@@ -574,8 +617,8 @@ const Filter = (props: FilterType) => {
 						<Button
 							sx={{
 								borderRadius: 0,
-								border: searchFilter?.search?.roomsList?.includes(2) ? '2px solid #181A20' : '1px solid #b9b9b9',
-								borderLeft: searchFilter?.search?.roomsList?.includes(2) ? undefined : 'none',
+								border: searchFilter?.search?.roomList?.includes(2) ? '2px solid #181A20' : '1px solid #b9b9b9',
+								borderLeft: searchFilter?.search?.roomList?.includes(2) ? undefined : 'none',
 							}}
 							onClick={() => propertyRoomSelectHandler(2)}
 						>
@@ -584,8 +627,8 @@ const Filter = (props: FilterType) => {
 						<Button
 							sx={{
 								borderRadius: 0,
-								border: searchFilter?.search?.roomsList?.includes(3) ? '2px solid #181A20' : '1px solid #b9b9b9',
-								borderLeft: searchFilter?.search?.roomsList?.includes(3) ? undefined : 'none',
+								border: searchFilter?.search?.roomList?.includes(3) ? '2px solid #181A20' : '1px solid #b9b9b9',
+								borderLeft: searchFilter?.search?.roomList?.includes(3) ? undefined : 'none',
 							}}
 							onClick={() => propertyRoomSelectHandler(3)}
 						>
@@ -594,9 +637,9 @@ const Filter = (props: FilterType) => {
 						<Button
 							sx={{
 								borderRadius: 0,
-								border: searchFilter?.search?.roomsList?.includes(4) ? '2px solid #181A20' : '1px solid #b9b9b9',
-								borderLeft: searchFilter?.search?.roomsList?.includes(4) ? undefined : 'none',
-								borderRight: searchFilter?.search?.roomsList?.includes(4) ? undefined : 'none',
+								border: searchFilter?.search?.roomList?.includes(4) ? '2px solid #181A20' : '1px solid #b9b9b9',
+								borderLeft: searchFilter?.search?.roomList?.includes(4) ? undefined : 'none',
+								borderRight: searchFilter?.search?.roomList?.includes(4) ? undefined : 'none',
 							}}
 							onClick={() => propertyRoomSelectHandler(4)}
 						>
@@ -605,7 +648,7 @@ const Filter = (props: FilterType) => {
 						<Button
 							sx={{
 								borderRadius: '0 12px 12px 0',
-								border: searchFilter?.search?.roomsList?.includes(5) ? '2px solid #181A20' : '1px solid #b9b9b9',
+								border: searchFilter?.search?.roomList?.includes(5) ? '2px solid #181A20' : '1px solid #b9b9b9',
 							}}
 							onClick={() => propertyRoomSelectHandler(5)}
 						>
