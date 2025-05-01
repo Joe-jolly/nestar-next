@@ -32,7 +32,7 @@ const MyFavorites: NextPage = () => {
 			input: searchFavorites,
 		},
 		notifyOnNetworkStatusChange: true,
-		onCompleted(data: T) {
+		onCompleted: (data: T) => {
 			setMyFavorites(data.getFavorites?.list);
 			setTotal(data.getFavorites?.metaCounter?.[0]?.total || 0);
 		},
@@ -54,9 +54,10 @@ const MyFavorites: NextPage = () => {
 					input: id,
 				},
 			});
+
 			await getFavoritesRefetch({ input: searchFavorites });
 		} catch (err: any) {
-			console.log('Error on likePropertyHandler:', err.member);
+			console.log('ERROR, likePropertyHandler:', err.message);
 			sweetMixinErrorAlert(err.message).then();
 		}
 	};
@@ -75,7 +76,7 @@ const MyFavorites: NextPage = () => {
 				<Stack className="favorites-list-box">
 					{myFavorites?.length ? (
 						myFavorites?.map((property: Property) => {
-							return <PropertyCard property={property} myFavorites={true} likePropertyHandler={likePropertyHandler} />;
+							return <PropertyCard property={property} likePropertyHandler={likePropertyHandler} myFavorites={true} />;
 						})
 					) : (
 						<div className={'no-data'}>
