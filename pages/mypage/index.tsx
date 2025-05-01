@@ -37,7 +37,7 @@ const MyPage: NextPage = () => {
 
 	const [subscribe] = useMutation(SUBSCRIBE);
 	const [unsubscribe] = useMutation(UNSUBSCRIBE);
-	const [likeTargetMember] = useMutation(LIKE_TARGET_MEMBER);
+	const [likeTargetMember] = useMutation(LIKE_TARGET_MEMBER); 
 
 	/** LIFECYCLES **/
 	
@@ -49,11 +49,16 @@ const MyPage: NextPage = () => {
 
 	const subscribeHandler = async (id: string, refetch: any, query: any) => {
 		try {
+			console.log('id: ', id);
 			if (!id) throw new Error(Messages.error1);
-			if (!user?._id) throw new Error(Messages.error2);
+			if (!user._id) throw new Error(Messages.error2);
 
-			await subscribe({ variables: { input: id } });
-			await sweetTopSmallSuccessAlert('Subscibed', 800);
+			await subscribe({
+				variables: {
+					input: id,
+				},
+			});
+			await sweetTopSmallSuccessAlert('Subscribed!', 800);
 			await refetch({ input: query });
 		} catch (err: any) {
 			sweetErrorHandling(err).then();
@@ -63,10 +68,14 @@ const MyPage: NextPage = () => {
 	const unsubscribeHandler = async (id: string, refetch: any, query: any) => {
 		try {
 			if (!id) throw new Error(Messages.error1);
-			if (!user?._id) throw new Error(Messages.error2);
+			if (!user._id) throw new Error(Messages.error2);
 
-			await unsubscribe({ variables: { input: id } });
-			await sweetTopSmallSuccessAlert('Unsubscibed', 800);
+			await unsubscribe({
+				variables: {
+					input: id,
+				},
+			});
+			await sweetTopSmallSuccessAlert('Unsubscribed!', 800);
 			await refetch({ input: query });
 		} catch (err: any) {
 			sweetErrorHandling(err).then();

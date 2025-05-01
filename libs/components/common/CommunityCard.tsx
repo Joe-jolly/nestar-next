@@ -51,7 +51,7 @@ const CommunityCard = (props: CommunityCardProps) => {
 			<Stack
 				sx={{ width: size === 'small' ? '285px' : '317px' }}
 				className="community-general-card-config"
-				onClick={(e: React.MouseEvent<HTMLDivElement>) => likeArticleHandler(e, user, boardArticle?._id)}
+				onClick={(e: React.MouseEvent<HTMLDivElement>) => chooseArticleHandler(e, boardArticle)}
 			>
 				<Stack className="image-box">
 					<img src={imagePath} alt="" className="card-img" />
